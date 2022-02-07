@@ -1,0 +1,3 @@
+include LICENCE
+exclude README.md
+rescursive-include example
