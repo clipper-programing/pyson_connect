@@ -178,7 +178,7 @@ class PysonConnect:
             size = exif_img.size
 
             del_exif = Image.new(mode, size)
-            del_exif.putdata(imgData)
+            del_exif.putdata(img_data)
             del_exif.save(f'del_{name}{extension}')
 
             file_path = f'del_{name}{extension}'
