@@ -239,14 +239,14 @@ class PysonConnect:
             self.err.errors(message=message)
 
 
-    def cancel_print(self, access_token, subject_id, job_id, opBy='user'):
+    def cancel_print(self, access_token, subject_id, job_id, op_by='user'):
         req_uri = f'{self.base_uri}/api/1/printing/printers/{subject_id}/jobs/{job_id}/cancel'
         headers = {
                 'Authorization':f'Bearer {access_token}',
                 'Content-Type':'application/json'
                 }
         data = {
-                'operated_by':opBy
+                'operated_by':op_by
                 }
         r = requests.post(url=req_uri, headers=headers, data=json.dumps(data))
         rjson = r.json()
