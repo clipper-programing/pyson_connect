@@ -5,7 +5,7 @@ thisDir = Path(__file__).parent
 
 setup(
         name='pyson_connect',
-        version='0.2.41',
+        version='0.2.42',
         author='Ryuse Sato(inchoxd)',
         author_email='incho@clpr.pro',
         description='pyson_connect: This is the third party module for using a Epson Connect',
