@@ -5,31 +5,31 @@ EpsonConnectのデベロッパーズサイトにてライセンス申請を行�
 
 ## モジュールのインポート
 以下のようにimportしてください。
-```
+```python
 import pyson_connect
 ```
 
 ## インスタンス化
 ```
 ps = pyson_connect.PysonConnect(クライアントID, クライアントシークレット)
-```
+```python
 なお、以下の変数名で環境変数に登録するとソースコードにクライアントIDとクライアントシークレットをソースコード上に記載しなくても利用することができます。
 ```
 export epsonClientID=クライアントID
 export epsonClientSecret=クライアントシークレット
 ```
 環境変数登録後は以下のようにしてインスタンス化します。
-```
+```python
 ps = pyson_connect.PysonConnect()
 ```
 
 ## EpsonConnect認証関数
 認証を行う関数です。引数にEpsonConnectのメールアドレスを指定します。
-```
+```python
 ps.authentification(EpsonConnectのメールアドレス)
 ```
 戻り値は以下のようになります。
-```
+```python
 {
     "access_token":"アクセストークン",
     "expires_in":"アクセストークン有効時間(sec)",
@@ -40,11 +40,11 @@ ps.authentification(EpsonConnectのメールアドレス)
 
 ## アクセストークン再発行関数 
 アクセストークンを再発行する関数です。引数にアクセストークンを指定します。
-```
+```python
 ps.reissue_access_token(リフレッシュトークン)
 ```
 戻り値は以下のようになります。
-```
+```python
 {
     "access_token":"アクセストークン",
     "expires_in":"アクセストークン有効時間(sec)",
@@ -54,15 +54,15 @@ ps.reissue_access_token(リフレッシュトークン)
 
 ## 印刷能力取得関数 
 直前に認証を行ったプリンタの印刷能力を取得する関数です。引数には印刷モードを指定します。
-```
+```python
 ps.get_device_print_capabilities(print_mode)
 ```
 以下のようにすると、すでに認証を通したデバイスの情報を得ることができるようになります。
-```
+```python
 ps.get_device_print_capabilities(print_mode, access_token=アクセストークン, subject_id=プリンタのID)
 ```
 戻り値は以下のようになります。
-```
+```python
 {
     "color_modes": [
         "color",
@@ -92,15 +92,15 @@ ps.get_device_print_capabilities(print_mode, access_token=アクセストーク�
 
 ## 印刷設定関数
 直前に認証を行ったプリンタに対して印刷設定を行うことができる関数です。
-```
+```python
 ps.print_setting(設定データ)
 ```
 以下のようにすると、すでに認証を通したデバイスに対して印刷設定を行えるようになります。
-```
+```python
 ps.print_setting(印刷データ, access_token=アクセストークン, subject_id=プリンタのID)
 ```
 印刷データの例
-```
+```python
     data = {
                 "job_name":"ジョブを識別するための名前(最大256文字)",
                 "print_mode":"印刷モード(document/photo)",
@@ -121,7 +121,7 @@ ps.print_setting(印刷データ, access_token=アクセストークン, subject
 *なお、詳しい印刷データの内容はEpson Connect API仕様書の5.2.4. 印刷設定のページをご覧ください*
 
 戻り値は以下のようになります。
-```
+```python
 {
     "job_id":"印刷ジョブID",
     "upload_uri":"ファイルアップロード用URI"
@@ -131,41 +131,41 @@ ps.print_setting(印刷データ, access_token=アクセストークン, subject
 ## ファイルアップロード関数
 直前に認証を行い、印刷設定をおこなったプリンタに紐付けられたアップロードURIに対してファイルをアップロードする関数です。
 ファイルパスに印刷したい画像やドキュメントファイルのURLを指定するとインターネット上に存在する画像を印刷することができます。
-```
+```python
 ps.upload_print_file(ファイルパス, 印刷モード)
 ```
 以下のようにすると、すでにに印刷設定を行ったプリンタに対してファイルを送信することができるようになる。
-```
+```python
 ps.upload_print_file(file_path, document_type, job_id=印刷ジョブID, upload_uri=ファイルアップロード用URI)
 ```
 
 ## 印刷実行関数
 直前に認証、印刷設定及びファイルアップロードを行ったプリンタに対して印刷指示を送れる関数です。
-```
+```python
 ps.excute_print()
 ```
 以下のようにすると、すでに印刷設定、ファイルアップロードを行ったプリンタに対してプリント指示を遅れるようになります。
-```
+```python
 ps.excute_print(access_token=アクセストークン, subject_id=プリンタのID, jobID=印刷ジョブID)
 ```
 
 ## 印刷キャンセル関数
 引数に指定したアクセストークン、サブジェクトID、印刷ジョブIDに対して印刷のキャンセル指示を送ることができます。
-```
+```python
 ps.cancel_print(アクセストークン, プリンタのID, 印刷ジョブID)
 ```
 
 ## プリントジョブ取得関数
 直前に認証、印刷指示を送ったプリンタに対してプリンタの実行情報を取得することのできる関数です。
-```
+```python
 ps.get_print_job_info()
 ```
 以下のようにすることですでに認証や印刷実行を行ったプリンタの実行情報を取得できるようになります。
-```
+```python
 ps.get_print_job_info(access_token=アクセストークン, subject_id=プリンタのID, jobID=印刷ジョブID)
 ```
 戻り値は以下のようになります。
-```
+```python
 {
     "status":"印刷ステータス",
     "status_reason":"ステータスの内容",
@@ -178,15 +178,15 @@ ps.get_print_job_info(access_token=アクセストークン, subject_id=プリ�
 
 ## デバイス情報取得関数
 直前に認証を行ったプリンタの情報を取得することができる関数です。
-```
+```python
 ps.get_device_info()
 ```
 以下のようにするとすでに認証などを行っているプリンタの情報を取得することができるようになります。
-```
+```python
 ps.get_device_info(access_token=アクセストークン, subject_id=プリンタのID)
 ```
 戻り値は以下のようになります。
-```
+```python
 {
     "printer_name":"デバイスの製品名",
     "serial_no":"デバイスのシリアルナンバー",
@@ -196,21 +196,21 @@ ps.get_device_info(access_token=アクセストークン, subject_id=プリン�
 
 ## 認証取り消し関数
 アクセストークンとプリンタのIDを指定することにより、該当の認証情報を取り消すことができます。
-```
+```python
 ps.cancel_authentication(アクセストークン, プリンタのID)
 ```
     
 ## 印刷通知設定関数
 直前に認証などを行ったプリンタの印刷結果をdataのなかで指定したURLに対して通知を行うかを設定できる関数です。
-```
+```python
 ps.notification_setting(data)
 ```
 以下のようにすることですでに認証などを行っているプリンタの印刷結果などの通知を設定することができるようになります。
-```
+```python
 ps.notification_setting(data, access_token=アクセストークン, subject_id=プリンタのID)
 ```
 通知設定データの例
-```
+```python
     data = {
             "notification":通知の有無(bool),
             "callback_uri":"通知を受信するURI":
@@ -220,15 +220,15 @@ ps.notification_setting(data, access_token=アクセストークン, subject_id=
 
 ## スキャン宛先一覧関数
 直前に認証などを行ったプリンタに保存されているスキャン宛先の一覧を取得することができる関数です。
-```
+```python
 ps.get_scan_destination_list()
 ```
 以下のようにすることですでに認証などを行っているプリンタの情報を取得することができます。
-```
+```python
 ps.get_scan_destination_list(access_token=アクセストークン, subject_id=プリンタのID)
 ```
 戻り値は以下のようになります。
-```
+```python
 {
     "destinations": [
         {
@@ -243,15 +243,15 @@ ps.get_scan_destination_list(access_token=アクセストークン, subject_id=�
 
 ## スキャン宛先登録関数
 直前に認証などを行ったプリンタに対してスキャン宛先を登録することのできる関数です。
-```
+```python
 ps.register_scan_destination(data)
 ```
 以下のようにすることですでに認証などを行っているプリンタに対してスキャン宛先を登録することができます。
-```
+```python
 ps.register_scan_destination(data, access_token=アクセストークン, subject_id=プリンタのID)
 ```
 宛先登録用データの例
-```
+```python
     data = {
             "alias_name":"エイリアス名",
             "dest_type":"スキャン宛先の種別(url/mail)",
@@ -261,15 +261,15 @@ ps.register_scan_destination(data, access_token=アクセストークン, subjec
 
 ## スキャン宛先更新関数
 直前に認証などを行ったプリンタに対して、既に登録されている宛先を変更することのできる関数です。
-```
+```python
 ps.update_scan_destination(data)
 ```
 以下のようにすることで既に認証を行っているプリンタに対しても同様なことが行えます。
-```
+```python
 ps.update_scan_destination(data, access_token=アクセストークン, subject_id=プリンタのID)
 ```
 宛先変更用データの例
-```
+```python
     data = {
             "scan_dest_id":scan_dest_id,
             "alias_name":"エイリアス名",
@@ -280,6 +280,6 @@ ps.update_scan_destination(data, access_token=アクセストークン, subject_
 
 ## スキャン宛先削除関数
 アクセストークン、プリンタのID、スキャン宛先IDを指定することにより、指定した宛先をプリンタから削除できる関数です。
-```
+```python
 ps.delete_scan_destination(アクセストークン, プリンタのID, スキャン宛先ID)
 ```
