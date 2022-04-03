@@ -10,11 +10,11 @@ import pyson_connect
 ```
 
 ## インスタンス化
-```
-ps = pyson_connect.PysonConnect(クライアントID, クライアントシークレット)
 ```python
-なお、以下の変数名で環境変数に登録するとソースコードにクライアントIDとクライアントシークレットをソースコード上に記載しなくても利用することができます。
+ps = pyson_connect.PysonConnect(クライアントID, クライアントシークレット)
 ```
+なお、以下の変数名で環境変数に登録するとソースコードにクライアントIDとクライアントシークレットをソースコード上に記載しなくても利用することができます。
+```shell
 export epsonClientID=クライアントID
 export epsonClientSecret=クライアントシークレット
 ```
