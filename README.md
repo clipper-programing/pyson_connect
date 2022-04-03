@@ -107,12 +107,12 @@ ps.print_setting(印刷データ, access_token=アクセストークン, subject
                 "print_setting":{
                     "media_size":"用紙サイズ(ex: ms_a4)",
                     "media_type":"印刷する用紙の種別(ex: mt_plainpaper)",
-                    "borderless":"印刷時のフチ有無(bool),
+                    "borderless":印刷時のフチ有無(bool),
                     "print_quality":"印刷品質(normal/high/draft)",
                     "source":"給紙装置(ex: front1)",
                     "color_mode":"カラー設定(mono/color)",
                     "2_sided":"両面印刷(none/long/short)",
-                    "reverse_order":逆順印刷の可否(bool),
+                    "reverse_order":"逆順印刷の可否(bool)",
                     "copies":印刷部数(1~99),
                     "collate":部単位印刷の可否(bool)
                     }
@@ -169,7 +169,7 @@ ps.get_print_job_info(access_token=アクセストークン, subject_id=プリ�
 {
     "status":"印刷ステータス",
     "status_reason":"ステータスの内容",
-    "start_date":”印刷実行日時",
+    "start_date":"印刷実行日時",
     "job_name":"印刷ジョブ名",
     "ttl_pages":"印刷ページ数",
     "update_date":"印刷ジョブ状態の更新日時"
