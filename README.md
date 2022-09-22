@@ -4,6 +4,11 @@ EpsonConnectのデベロッパーズサイトにてライセンス申請を行�
 [EpsonConnectデベロッパーズサイトはこちら](https://www.epsondevelopers.com/api/epson-connect-j/)
 
 ## モジュールのインポート
+pipコマンドを利用してインストールしてください
+```python
+pip3 install pyson-connect
+```
+
 以下のようにimportしてください。
 ```python
 import pyson_connect
